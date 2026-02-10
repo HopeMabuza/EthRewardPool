@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 
-// reentancyguard??contract EthRewardPool is ReentrancyGuard {    address public owner;    uint256 public roundId;    uint256 public roundStart;    uint256 public constant ROUND_DURATION = 10 minutes;    uint256 public constant MIN_CONTRIBUTION = 0.000000000000000001 ether;
+contract EthRewardPool is ReentrancyGuard {    address public owner;    uint256 public roundId;    uint256 public roundStart;    uint256 public constant ROUND_DURATION = 10 minutes;    uint256 public constant MIN_CONTRIBUTION = 0.000000000000000001 ether;
     // payable???    address payable[] public participants;
 
     mapping(address => bool) public hasJoined;
@@ -35,3 +35,4 @@ pragma solidity ^0.8.20;
         // Reset round        for (uint256 i = 0; i < participants.length; i++) {            hasJoined[participants[i]] = false;        }        delete participants;
         roundStart = block.timestamp;        roundId++;        emit NewRoundStarted(roundId);    }
     function getRewardRecipient(uint256 _roundId) external view returns (address payable) {        return rewardHistory[_roundId];    }}
+
